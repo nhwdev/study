@@ -32,6 +32,6 @@ public class boj_1546 {
 		}
 		bw.write(avg + "");
 		bw.flush();
-		bw.flush();
+		bw.close();
 	}
 }
