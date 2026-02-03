@@ -17,9 +17,8 @@ public class boj_27866 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int index = Integer.parseInt(st.nextToken());
 		for(int i =0; i < str.length(); i++) {
-			chars[i] = str.charAt(i);
 			if((index-1) == i){
-				bw.write(chars[i]);
+				bw.write(str.charAt(i));
 				break;
 			}
 		}
