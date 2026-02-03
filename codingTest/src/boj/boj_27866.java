@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
 // https://www.acmicpc.net/problem/27866
 
 public class boj_27866 {
@@ -13,15 +12,7 @@ public class boj_27866 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		String str = br.readLine();
-		char[] chars = new char[str.length()];
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int index = Integer.parseInt(st.nextToken());
-		for(int i =0; i < str.length(); i++) {
-			if((index-1) == i){
-				bw.write(str.charAt(i));
-				break;
-			}
-		}
+		bw.write(str.charAt(Integer.parseInt(br.readLine()) - 1));
 		bw.flush();
 		bw.close();
 		br.close();
