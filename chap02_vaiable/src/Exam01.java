@@ -1,4 +1,3 @@
-
 //잘못된 문장을 골라내고 그 이유를 설명하시오.
 public class Exam01 {
 	public static void main(String[] args) {
