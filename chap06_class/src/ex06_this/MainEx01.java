@@ -1,0 +1,32 @@
+package ex06_this;
+
+/*
+ * this 예약어
+ * this 참조변수
+ *   - 자기 참조변수
+ *   - 현재 객체의 참조값 저장하는 변수
+ *   - 인스턴스 메서드의 지역 선언됨.
+ *   - 객체 생성시 자신 객체의 참조값 저장
+ *   - 지역변수와 멤버변수 구분시 사용함
+ *   - 지역변수와 멤버변수의 이름이 같은 경우 지역변수 우선
+ *    => this 참조변수를 이용하여 멤버변수값을 호출
+ *   - 지역변수와 멤버변수의 이름이 다른 경우
+ *    => this 참조변수를 생략해도 멤버변수값을 호출
+ * this 생성자
+ *   - 같은 클래스내의 다른 생성자 호출
+ *   - 반드시 첫줄에 구현해야함
+ */
+public class MainEx01 {
+	public static void main(String[] args) {
+		Car c1 = new Car("Blue", 1234);
+		System.out.println(c1);
+		Car c2 = new Car();
+		System.out.println(c2);
+		Car c3 = new Car("Red");
+		System.out.println(c3); // 3번자동차:Red,1000
+		Car c4 = new Car(1234);
+		System.out.println(c4); // 4번자동차:White,1234
+		Car c5 = new Car(c1);
+		System.out.println(c5); // 5번자동차:Blue,1234
+	}
+}
