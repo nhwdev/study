@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 // 0 1 2 2 2 7
 // 예제 출력 1 
 // 1 0 0 0 0 1
-public class boj_3003 {
+public class BOJ_3003 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
