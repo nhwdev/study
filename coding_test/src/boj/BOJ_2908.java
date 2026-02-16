@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 // 734 893
 // 예제 출력 1 
 // 437
-public class boj_2908 {
+public class BOJ_2908 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
