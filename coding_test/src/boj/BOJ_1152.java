@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 // The Curious Case of Benjamin Button
 // 예제 출력 1 
 // 6
-public class boj_1152 {
+public class BOJ_1152 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
