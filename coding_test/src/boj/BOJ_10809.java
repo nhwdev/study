@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 // baekjoon
 // 예제 출력 1 
 // 1 0 -1 -1 2 -1 -1 -1 -1 4 3 -1 -1 7 5 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-public class boj_10809 {
+public class BOJ_10809 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
