@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 // https://www.acmicpc.net/problem/25083
-public class boj_25083 {
+public class BOJ_25083 {
 	public static void main(String[] args) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		bw.write("         ,r'\"7");
