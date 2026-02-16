@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 // https://www.acmicpc.net/problem/10988
-public class boj_10998 {
+public class BOJ_10998 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
