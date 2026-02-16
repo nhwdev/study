@@ -33,6 +33,9 @@ public class BOJ_2941 {
 				count++;
 			}
 		}
-		System.out.println(str.replace(" ", "").length() + count);
+		bw.write(String.valueOf(str.replace(" ", "").length() + count));
+		bw.flush();
+		bw.close();
+		br.close();
 	}
 }
