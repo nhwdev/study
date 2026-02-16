@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 // https://www.acmicpc.net/problem/1546
-public class boj_1546 {
+public class BOJ_1546 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
