@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
  * - 작은 수부터 조건 검사만 하면 됨
  * - 브루트포스가 최적
  */
-public class boj_1145 {
+public class BOJ_1145 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
