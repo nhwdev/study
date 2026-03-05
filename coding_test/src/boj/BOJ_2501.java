@@ -22,7 +22,7 @@ public class BOJ_2501 {
 				count++;
 				if (count == k) {
 					number = i;
-				} 
+				}
 			}
 		}
 		bw.write(String.valueOf(number));
