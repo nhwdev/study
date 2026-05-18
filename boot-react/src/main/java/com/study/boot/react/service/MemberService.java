@@ -1,6 +1,7 @@
 package com.study.boot.react.service;
 
 import com.study.boot.react.dto.MemberDto;
+import com.study.boot.react.entity.MemberEntity;
 import com.study.boot.react.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,5 +45,23 @@ public class MemberService {
 
     public Boolean idCheck(String id) {
         return memberRepository.existsById(id);
+    }
+
+    public void loginMember(MemberDto memberDto) {
+        MemberEntity target = memberRepository
+                .findById(memberDto.getId())
+                .orElseThrow(IllegalArgumentException::new); // 아이디 검증
+        if (!target.getPass().equals(memberDto.getPass())) throw new IllegalArgumentException(); // 비밀번호 검증
+    }
+
+    public MemberDto getMember(String paramId, String cookieId) {
+        if (cookieId == null) {
+            throw new NullPointerException();
+        }
+        if (!paramId.equals(cookieId)) { // 쿠키 id, 파라미터 id 비교 검증
+            throw new IllegalArgumentException();
+        }
+        MemberEntity target = memberRepository.findById(paramId).orElseThrow(IllegalArgumentException::new); // DB 값 데이터 조회
+        return new MemberDto(target);
     }
 }
