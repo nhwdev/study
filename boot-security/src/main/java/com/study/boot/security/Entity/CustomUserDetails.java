@@ -29,14 +29,9 @@ public class CustomUserDetails implements UserDetails {
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
         // 익명 클래스를 통해 GrantedAuthority 인터페이스를 구현하고 리스트에 추가
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                // 시큐리티 권한 관례에 맞게 "ROLE_ADMIN" 또는 "ROLE_USER" 형태의 문자열을 반환해야 함
-                // (만약 DB에 "ADMIN"으로 저장된다면 "ROLE_" + userEntity.getRole() 형태로 리턴 필요)
-                return userEntity.getRole();
-            }
-        });
+        // 시큐리티 권한 관례에 맞게 "ROLE_ADMIN" 또는 "ROLE_USER" 형태의 문자열을 반환해야 함
+        // (만약 DB에 "ADMIN"으로 저장된다면 "ROLE_" + userEntity.getRole() 형태로 리턴 필요)
+        collection.add((GrantedAuthority) userEntity::getRole);
 
         // 사용자의 권한이 담긴 컬렉션을 반환 (인증 완료 후 시큐리티가 이를 기억함)
         return collection;
