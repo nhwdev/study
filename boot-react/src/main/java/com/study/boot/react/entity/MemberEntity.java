@@ -1,5 +1,6 @@
 package com.study.boot.react.entity;
 
+import com.study.boot.react.dto.MemberDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,4 +24,25 @@ public class MemberEntity {
     private String tel;
     private String email;
     private String profileFileName;
+
+    public void patch(MemberDto memberDto) {
+        if (!id.equals(memberDto.getId())) {
+            id = memberDto.getId();
+        }
+        if (!pass.equals(memberDto.getPass())) {
+            pass = memberDto.getPass();
+        }
+        if (!name.equals(memberDto.getName())) {
+            name = memberDto.getName();
+        }
+        if (gender != memberDto.getGender()) {
+            gender = memberDto.getGender();
+        }
+        if (!tel.equals(memberDto.getTel())) {
+            tel = memberDto.getTel();
+        }
+        if (!email.equals(memberDto.getEmail())) {
+            email = memberDto.getEmail();
+        }
+    }
 }

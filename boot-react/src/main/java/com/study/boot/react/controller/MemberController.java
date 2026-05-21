@@ -51,14 +51,22 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public ResponseEntity<?> myPage(@RequestParam(value = "id") String paramId, @CookieValue(name = "id", required = false) String cookieId) {
+    public ResponseEntity<?> myPage(@CookieValue(name = "id", required = false) String cookieId) {
         try {
-            MemberDto memberDto = memberService.getMember(paramId, cookieId);
+            MemberDto memberDto = memberService.getMember(cookieId);
             return ResponseEntity.ok(memberDto);
         } catch (NullPointerException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 세션이 만료되었습니다.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("비정상적인 접근입니다. 인증 정보가 일치하지 않습니다");
         }
+    }
+
+    @GetMapping("updatePro")
+    public ResponseEntity<?> updatePro(@ModelAttribute MemberDto memberDto, @CookieValue(name = "id") String cookieId) {
+        // 1. 수정 서비스 위임
+        MemberDto updatedMember = memberService.updateMember(cookieId, memberDto);
+        // 2. 결과 마이페이지로 이동하므로 dto
+        return ResponseEntity.status(HttpStatus.OK).body(updatedMember);
     }
 }

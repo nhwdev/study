@@ -54,14 +54,24 @@ public class MemberService {
         if (!target.getPass().equals(memberDto.getPass())) throw new IllegalArgumentException(); // 비밀번호 검증
     }
 
-    public MemberDto getMember(String paramId, String cookieId) {
+    public MemberDto getMember(String cookieId) {
         if (cookieId == null) {
             throw new NullPointerException();
         }
-        if (!paramId.equals(cookieId)) { // 쿠키 id, 파라미터 id 비교 검증
+        MemberEntity target = memberRepository.findById(cookieId).orElseThrow(IllegalArgumentException::new); // DB 값 데이터 조회
+        return new MemberDto(target);
+    }
+
+    public MemberDto updateMember(String cookieId, MemberDto memberDto) {
+        // 1. 조회
+        MemberEntity target = memberRepository.findById(cookieId).orElseThrow(IllegalArgumentException::new);
+        // 2. 예외처리
+        if (!memberDto.getId().equals(target.getId())) {
             throw new IllegalArgumentException();
         }
-        MemberEntity target = memberRepository.findById(paramId).orElseThrow(IllegalArgumentException::new); // DB 값 데이터 조회
-        return new MemberDto(target);
+        // 2. 업데이트
+        target.patch(memberDto);
+        // 3. 결과
+        return new MemberDto().;
     }
 }
