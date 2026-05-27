@@ -35,14 +35,14 @@ pipeline {
 
                     // 3. 빌드한 이미지로 컨테이너 실행
                     sh """
-                    docker run -d -p 8888:8888 --name shop-container \
-                      -e NAVER_MAIL_ID="${MY_NAVER_ID}" \
-                      -e NAVER_MAIL_PW="${MY_NAVER_PW}" \
-                      -e GOOGLE_MAIL_ID="${MY_GOOGLE_ID}" \
-                      -e GOOGLE_MAIL_PW="${MY_GOOGLE_PW}" \
-                      -e MY_API="${MY_API}"
-                      my-shop-app
+                    echo "NAVER_MAIL_ID=${MY_NAVER_ID}" > .env
+                    echo "NAVER_MAIL_PW=${MY_NAVER_PW}" >> .env
+                    echo "GOOGLE_MAIL_ID=${MY_GOOGLE_ID}" >> .env
+                    echo "GOOGLE_MAIL_PW=${MY_GOOGLE_PW}" >> .env
+                    echo "OPENAI_API_KEY=${MY_API}" >> .env
                     """
+
+                    sh 'docker run -d -p 8888:8888 --name shop-container --env-file .env my-shop-app'
                 }
             }
         }
