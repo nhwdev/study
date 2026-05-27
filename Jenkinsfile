@@ -6,6 +6,7 @@ pipeline {
         MY_NAVER_PW = credentials('NAVER_MAIL_PW')
         MY_GOOGLE_ID = credentials('GOOGLE_MAIL_ID')
         MY_GOOGLE_PW = credentials('GOOGLE_MAIL_PW')
+        MY_API = credentials('OPENAI_API_KEY')
     }
     stages {
         stage('Checkout') {
@@ -39,6 +40,7 @@ pipeline {
                       -e NAVER_MAIL_PW="${MY_NAVER_PW}" \
                       -e GOOGLE_MAIL_ID="${MY_GOOGLE_ID}" \
                       -e GOOGLE_MAIL_PW="${MY_GOOGLE_PW}" \
+                      -e MY_API="${MY_API}"
                       my-shop-app
                     """
                 }
