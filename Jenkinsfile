@@ -42,7 +42,7 @@ pipeline {
                     echo "OPENAI_API_KEY=${MY_API}" >> .env
                     """
 
-                    sh 'docker run -d -p 8888:8888 --name shop-container --env-file .env my-shop-app'
+                    sh 'docker run -d -p 8888:8888 --name shop-container -v $(pwd)/.env:/app/.env -e SPRING_CONFIG_ADDITIONAL_LOCATION=/app/.env my-shop-app'
                 }
             }
         }
