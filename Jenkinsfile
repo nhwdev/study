@@ -1,6 +1,12 @@
 pipeline {
     agent any
-
+    environment {
+        // 젠킨스에서 만든 ID를 가져와서 변수에 할당
+        MY_NAVER_ID = credentials('NAVER_MAIL_ID')
+        MY_NAVER_PW = credentials('NAVER_MAIL_PW')
+        MY_GOOGLE_ID = credentials('GOOGLE_MAIL_ID')
+        MY_GOOGLE_PW = credentials('GOOGLE_MAIL_PW')
+    }
     stages {
         stage('Checkout') {
             steps {
