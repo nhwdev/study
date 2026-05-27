@@ -1,7 +1,7 @@
 # Dockerfile : shop 프로젝트 폴더에 생성
 # 도커 이미지 생성을 위한 파일
 # 1단계: 빌드 환경 설정
-FROM openjdk:17-jdk-slim as builder
+FROM eclipse-temurin:17-jdk-slim as builder
 
 # 작업 경로 설정
 WORKDIR /app
