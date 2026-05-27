@@ -1,7 +1,7 @@
 # Dockerfile : shop 프로젝트 폴더에 생성
 # 도커 이미지 생성을 위한 파일
 # 1단계: 빌드 환경 설정
-FROM eclipse-temurin:17-jdk-slim as builder
+FROM eclipse-temurin:17-jdk-jammy as builder
 
 # 작업 경로 설정
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -Dmaven.test.skip=true
 
 # 2단계: 실행 환경 설정
-FROM eclipse-temurin:17-jdk-slim
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
 # builder 단계에서 생성된 .war 파일을 복사
