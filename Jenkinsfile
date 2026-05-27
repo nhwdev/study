@@ -33,7 +33,14 @@ pipeline {
                     sh 'docker rm shop-container || true'
 
                     // 3. 빌드한 이미지로 컨테이너 실행
-                    sh 'docker run -d -p 8888:8888 --name shop-container my-shop-app'
+                    sh """
+                    docker run -d -p 8888:8888 --name shop-container \
+                      -e NAVER_MAIL_ID="${MY_NAVER_ID}" \
+                      -e NAVER_MAIL_PW="${MY_NAVER_PW}" \
+                      -e GOOGLE_MAIL_ID="${MY_GOOGLE_ID}" \
+                      -e GOOGLE_MAIL_PW="${MY_GOOGLE_PW}" \
+                      my-shop-app
+                    """
                 }
             }
         }
