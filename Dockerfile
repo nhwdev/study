@@ -16,7 +16,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -Dmaven.test.skip=true
 
 # 2단계: 실행 환경 설정
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-slim
 WORKDIR /app
 
 # builder 단계에서 생성된 .war 파일을 복사
