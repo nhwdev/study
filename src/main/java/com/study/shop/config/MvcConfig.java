@@ -1,6 +1,7 @@
 package com.study.shop.config;
 
 import com.study.shop.intercepter.BoardIntercepter;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,6 +15,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableAspectJAutoProxy // AOP 관련 설정
+@MapperScan("com.study.shop.dao.mapper")
 //@EnableWebMvc // 기본 제공되는 web 처리 기능 유지
 public class MvcConfig implements WebMvcConfigurer {
 
