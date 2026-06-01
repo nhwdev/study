@@ -60,4 +60,4 @@ jobs:
             -v /home/ubuntu/upload:/app/upload nohker/shop:${{ github.run_number }}
             
             # 6-4. 사용하지 않는 이전 이미지들을 삭제하여 서버 용량 확보
-            docker image prune -f
+            docker image prune -a -f --filter "label!=keep"
