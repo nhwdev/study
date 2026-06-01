@@ -63,8 +63,8 @@ jobs:
             # 새로운 이미지로 컨테이너 실행 (포트 8888 연결 및 볼륨 설정)
             docker run -d --name shop -p 8888:8888 \
             -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
-            -e GOOGLE_MAIL_ID"${{ secrets.GOOGLE_MAIL_ID }}" \
-            -e GOOGLE_MAIL_PW"${{ secrets.GOOGLE_MAIL_PW }}" \
-            -e NAVER_MAIL_ID"${{ secrets.NAVER_MAIL_ID }}" \
-            -e NAVER_MAIL_PW"${{ secrets.NAVER_MAIL_PW }}" \
+            -e GOOGLE_MAIL_ID="${{ secrets.GOOGLE_MAIL_ID }}" \
+            -e GOOGLE_MAIL_PW="${{ secrets.GOOGLE_MAIL_PW }}" \
+            -e NAVER_MAIL_ID="${{ secrets.NAVER_MAIL_ID }}" \
+            -e NAVER_MAIL_PW="${{ secrets.NAVER_MAIL_PW }}" \
             -v /home/ubuntu/upload:/app/upload nohker/shop:${{ github.run_number }}
