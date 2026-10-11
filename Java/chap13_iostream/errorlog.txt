@@ -1,0 +1,2 @@
+java.lang.Exception: 예외 강제 발생
+	at ex04_filterstream.MainEx03_PrintStream.main(MainEx03_PrintStream.java:22)
