@@ -125,4 +125,4 @@ git clone https://github.com/nhwdev/study.git
 
 학습 코드는 `study/TenGrid/index.html`에서 관리합니다. [TenGrid Pages 워크플로](../.github/workflows/tengrid-pages.yml)가 `main`의 `TenGrid/**` 변경 시 해당 폴더를 GitHub Pages에 배포합니다. 수동 배포도 지원합니다.
 
-통합 사이트 주소는 `https://nhwdev.github.io/study/`입니다. 원본 TenGrid 저장소와 기존 배포 주소는 통합 후 삭제 대상으로 정리했습니다.
+통합 사이트 주소는 `https://nhwdev.github.io/study/`입니다. 원본 TenGrid 저장소는 통합 후 삭제했으며, 기존 배포 주소 대신 통합 사이트를 이용하세요.
