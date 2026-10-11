@@ -206,11 +206,13 @@ EC2 SSH 접속 — 기존 shop 컨테이너 교체
 
 ### 통합 저장소에서 배포 활성화
 
-1. `study`의 **Settings → Secrets and variables → Actions**에서 아래 Secrets를 등록합니다. 기존 Shop의 Secrets 값은 GitHub에서 다시 조회할 수 없으므로 별도로 등록해야 합니다.
+현재 Shop 자동 배포는 **비활성 상태**입니다. DB 설정 3개만 암호화된 Secrets에 등록돼 있으며, 나머지 10개 값은 확보되지 않아 필요한 항목만 [.env.example](./.env.example)에 빈 값으로 남겼습니다. 예시 파일은 자동으로 로드되지 않습니다. 로컬 실행 시 환경변수로 전달하거나 외부 설정 파일을 사용하세요.
+
+1. `study`의 **Settings → Secrets and variables → Actions**에서 아래 Secrets에 실제 값을 등록합니다. 비어 있는 예시 값으로는 배포할 수 없습니다.
 2. EC2의 Docker 사용 권한, 8888 포트, DB 연결을 확인합니다.
 3. Actions의 저장소 변수 `SHOP_DEPLOY_ENABLED`를 `true`로 설정합니다. 설정 전에는 배포 작업을 건너뜁니다.
 4. Docker 이미지 저장소를 바꾸려면 저장소 변수 `SHOP_IMAGE`를 지정합니다. 기본값은 `nohker/shop`입니다.
-5. Actions에서 **Shop Docker Deploy to EC2 → Run workflow**를 실행합니다. 기존 `shop` 컨테이너를 교체하므로, 실행 전에 원본 Shop의 자동 배포와 동시 실행되지 않도록 정리하세요.
+5. Actions에서 **Shop Docker Deploy to EC2 → Run workflow**를 실행합니다. 기존 `shop` 컨테이너를 새 이미지로 교체합니다.
 
 이미지 태그에는 `study-` 접두사, 실행 번호, 커밋 ID를 사용해 이전 저장소의 태그와 구분합니다.
 
@@ -227,4 +229,4 @@ EC2 SSH 접속 — 기존 shop 컨테이너 교체
 
 ### 공개 저장소 관리
 
-DB 접속값과 메일 계정값은 코드 대신 외부 설정을 사용합니다. 공개용 과거 커밋도 해당 값을 제거했고, 빌드 결과물과 IDE 파일은 제외했습니다. GitHub Secrets, 개인 설정 파일, 개인 키는 저장소에 추가하지 마세요. 기존 Actions 실행 기록은 원본 Shop 저장소에 남아 있습니다.
+DB 접속값과 메일 계정값은 코드 대신 외부 설정을 사용합니다. 공개용 과거 커밋도 해당 값을 제거했고, 빌드 결과물과 IDE 파일은 제외했습니다. GitHub Secrets, 개인 설정 파일, 개인 키는 저장소에 추가하지 마세요. 원본 Shop 저장소는 통합 후 삭제 대상으로 정리했으며, 과거 Actions 실행 기록과 미이전 Secrets는 이 저장소에 포함되지 않습니다.
