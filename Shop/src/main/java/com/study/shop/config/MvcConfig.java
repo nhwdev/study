@@ -4,6 +4,7 @@ import com.study.shop.intercepter.BoardIntercepter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,6 +19,8 @@ import java.util.Properties;
 @MapperScan("com.study.shop.dao.mapper")
 //@EnableWebMvc // 기본 제공되는 web 처리 기능 유지
 public class MvcConfig implements WebMvcConfigurer {
+    @Value("${resources.dir}")
+    private String resourcesDir;
 
     //예외처리 객체 : 예외발생시 예외 처리해 주는 객체
     @Bean
@@ -51,6 +54,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:///C:/dev/spring-boot/shop/src/main/resources/static/upload/");
+                .addResourceLocations(new java.io.File(resourcesDir, "static/upload/").toURI().toString());
     }
 }

@@ -3,7 +3,7 @@
 > **합이 10이 되는 숫자를 연결하는 웹 퍼즐 게임**입니다.  
 > 10 × 10 보드에서 숫자를 드래그해 지우고, 60초 동안 최대한 높은 점수를 기록하세요.
 
-### ▶️ [게임 바로 플레이하기](https://nhwdev.github.io/TenGrid/)
+### ▶️ [게임 바로 플레이하기](https://nhwdev.github.io/study/)
 
 <br>
 
@@ -109,18 +109,20 @@ TenGrid/
 
 ### 웹에서 실행
 
-[GitHub Pages 게임 페이지](https://nhwdev.github.io/TenGrid/)에서 바로 플레이할 수 있습니다.
+[GitHub Pages 게임 페이지](https://nhwdev.github.io/study/)에서 바로 플레이할 수 있습니다.
 
 ### 로컬에서 실행
 
 ```bash
-git clone https://github.com/nhwdev/TenGrid.git
+git clone https://github.com/nhwdev/study.git
 ```
 
-내려받은 폴더의 **`index.html`을 브라우저로 열면** 실행됩니다. 별도의 빌드나 환경변수 설정은 필요하지 않습니다.
+내려받은 폴더의 **`TenGrid/index.html`을 브라우저로 열면** 실행됩니다. 별도의 빌드나 환경변수 설정은 필요하지 않습니다.
 
 <br>
 
 ## 🌐 배포
 
-GitHub Pages가 `main` 브랜치의 루트 디렉터리를 배포하도록 설정되어 있습니다. 게임 코드는 루트의 `index.html`에서 관리합니다.
+학습 코드는 `study/TenGrid/index.html`에서 관리합니다. [TenGrid Pages 워크플로](../.github/workflows/tengrid-pages.yml)가 `main`의 `TenGrid/**` 변경 시 해당 폴더를 GitHub Pages에 배포합니다. 수동 배포도 지원합니다.
+
+통합 사이트 주소는 `https://nhwdev.github.io/study/`입니다. 기존 `https://nhwdev.github.io/TenGrid/` 주소는 원본 저장소에서 유지됩니다.

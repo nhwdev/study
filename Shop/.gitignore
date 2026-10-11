@@ -1,0 +1,15 @@
+/target/
+/.idea/
+/.settings/
+*.iml
+.classpath
+.factorypath
+.project
+.env
+.env.*
+!.env.example
+shop-local.properties
+application-local.properties
+/runtime/
+*.pem
+*.key

@@ -33,8 +33,6 @@
 
 ```text
 Shop/
-├── .github/workflows/
-│   └── deploy.yml                  # Docker 이미지 빌드 및 EC2 배포
 ├── .mvn/                          # Maven Wrapper 설정
 ├── src/main/
 │   ├── java/com/study/shop/
@@ -150,9 +148,11 @@ resources.dir=./runtime/
 
 환경변수로 설정할 경우 현재 설정 파일은 `OPENAI_API_KEY`, `GOOGLE_MAIL_ID`, `GOOGLE_MAIL_PW`, `NAVER_MAIL_ID`, `NAVER_MAIL_PW`를 참조합니다. 네이버 로그인·검색의 Client ID와 Client Secret은 각 컨트롤러의 설정도 확인해야 합니다.
 
+DB 연결은 `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` 환경변수로 전달합니다. `MAIL_SENDER`를 지정하지 않으면 `GOOGLE_MAIL_ID`를 발신자로 사용합니다. `RESOURCES_DIR`로 파일 저장 위치를 바꿀 수 있습니다.
+
 ### 3. 리소스와 외부 연동 준비
 
-- 업로드 파일은 `resources.dir` 아래 `static/upload/`에 저장됩니다. [MvcConfig](./src/main/java/com/study/shop/config/MvcConfig.java)의 `/upload/**` 리소스 경로도 같은 위치를 가리키도록 맞춥니다. 현재 해당 경로는 Windows 개발 환경의 절대 경로입니다.
+- 업로드 파일은 `resources.dir` 아래 `static/upload/`에 저장됩니다. [MvcConfig](./src/main/java/com/study/shop/config/MvcConfig.java)는 같은 위치를 `/upload/**`로 제공합니다.
 - 지역 선택 기능은 `resources.dir/static/file/sido.txt`를 읽습니다. 저장소의 [sido.txt](./src/main/resources/static/file/sido.txt)를 해당 위치에 복사합니다.
 - 네이버 로그인은 [UserController](./src/main/java/com/study/shop/controller/UserController.java)의 콜백 주소를 실제 서버 주소와 네이버 앱 설정에 맞춥니다. 현재 로그인 요청에 `8080` 포트가 있고 토큰 요청에는 `YOUR_CALLBACK_URL`이 남아 있습니다.
 - 비밀번호 찾기 메일은 별도 SMTP 파일 로딩과 계정 설정을 사용하는 코드입니다. 현재 참조하는 `/WEB-INF/CLasses/mail.properties` 파일이 없어, 관리자 메일 설정만으로 이 기능까지 바로 동작하지는 않습니다.
@@ -202,14 +202,29 @@ EC2 SSH 접속 — 기존 shop 컨테이너 교체
 8888 포트로 실행·업로드 디렉터리 볼륨 연결
 ```
 
-[deploy.yml](./.github/workflows/deploy.yml)은 `main` 브랜치의 Push로 실행됩니다. Docker 이미지 이름은 현재 `nohker/shop`이며, 다른 환경에서 사용하려면 워크플로의 이미지 이름과 서버 설정을 맞춰야 합니다.
+[shop-deploy.yml](../.github/workflows/shop-deploy.yml)은 `study` 루트에 있으며, `main`의 `Shop/**` 또는 배포 파일 변경 시 실행됩니다. 수동 실행도 지원합니다. 빌드 대상은 `Shop/`이며 다른 학습 폴더만 수정하면 Shop 배포는 실행되지 않습니다.
+
+### 통합 저장소에서 배포 활성화
+
+1. `study`의 **Settings → Secrets and variables → Actions**에서 아래 Secrets를 등록합니다. 기존 Shop의 Secrets 값은 GitHub에서 다시 조회할 수 없으므로 별도로 등록해야 합니다.
+2. EC2의 Docker 사용 권한, 8888 포트, DB 연결을 확인합니다.
+3. Actions의 저장소 변수 `SHOP_DEPLOY_ENABLED`를 `true`로 설정합니다. 설정 전에는 배포 작업을 건너뜁니다.
+4. Docker 이미지 저장소를 바꾸려면 저장소 변수 `SHOP_IMAGE`를 지정합니다. 기본값은 `nohker/shop`입니다.
+5. Actions에서 **Shop Docker Deploy to EC2 → Run workflow**를 실행합니다. 기존 `shop` 컨테이너를 교체하므로, 실행 전에 원본 Shop의 자동 배포와 동시 실행되지 않도록 정리하세요.
+
+이미지 태그에는 `study-` 접두사, 실행 번호, 커밋 ID를 사용해 이전 저장소의 태그와 구분합니다.
 
 | GitHub Actions Secret | 용도 |
 |-----------------------|------|
 | `DOCKER_USERNAME`, `DOCKER_PASSWORD` | Docker Hub 로그인 |
 | `EC2_HOST`, `EC2_USER`, `EC2_KEY` | 배포 서버 SSH 접속 |
+| `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` | MariaDB 연결 |
 | `OPENAI_API_KEY` | AI 챗봇 |
 | `GOOGLE_MAIL_ID`, `GOOGLE_MAIL_PW` | SMTP 계정 |
 | `NAVER_MAIL_ID`, `NAVER_MAIL_PW` | 네이버 계정 관련 설정 |
 
-배포 시 호스트의 `/home/ubuntu/upload`를 컨테이너의 `/app/upload`에 연결합니다. 업로드 저장 경로와 `/upload/**`의 조회 경로는 이 볼륨에 맞춰야 합니다. DB는 별도 MariaDB 연결을 사용하며, 현재 워크플로에는 DB 초기화나 DB 환경변수 전달 단계가 없습니다.
+배포 시 호스트의 `/home/ubuntu/upload`를 컨테이너의 `/app/upload`에 연결합니다. 업로드 파일은 이 볼륨에 보관되며, 지역 데이터 `sido.txt`는 컨테이너 시작 시 없는 경우 복사됩니다. DB 설정은 Secrets에서 환경변수로 전달하지만 테이블 초기화는 별도로 준비해야 합니다.
+
+### 공개 저장소 관리
+
+DB 접속값과 메일 계정값은 코드 대신 외부 설정을 사용합니다. 공개용 과거 커밋도 해당 값을 제거했고, 빌드 결과물과 IDE 파일은 제외했습니다. GitHub Secrets, 개인 설정 파일, 개인 키는 저장소에 추가하지 마세요. 기존 Actions 실행 기록은 원본 Shop 저장소에 남아 있습니다.

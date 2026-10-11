@@ -21,9 +21,10 @@ WORKDIR /app
 
 # builder 단계에서 생성된 .war 파일을 복사
 COPY --from=builder /app/target/shop-0.0.1-SNAPSHOT.war app.war
+COPY --from=builder /app/src/main/resources/static/file/sido.txt /app/sido.txt
 
 # 포트 설정
 EXPOSE 8888
 
 # 실행 명령어
-ENTRYPOINT ["java","-jar","app.war"]
+ENTRYPOINT ["sh","-c","mkdir -p /app/upload/static/file /app/upload/static/upload && cp -n /app/sido.txt /app/upload/static/file/sido.txt && exec java -jar app.war"]

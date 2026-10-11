@@ -1,0 +1,79 @@
+name: Shop Docker Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Shop/**'
+      - '.github/workflows/shop-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shop-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.SHOP_DEPLOY_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ${{ vars.SHOP_IMAGE || 'nohker/shop' }}
+      TAG: study-${{ github.run_number }}-${{ github.sha }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+      EC2_KEY: ${{ secrets.EC2_KEY }}
+      DB_URL: ${{ secrets.DB_URL }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GOOGLE_MAIL_ID: ${{ secrets.GOOGLE_MAIL_ID }}
+      GOOGLE_MAIL_PW: ${{ secrets.GOOGLE_MAIL_PW }}
+      NAVER_MAIL_ID: ${{ secrets.NAVER_MAIL_ID }}
+      NAVER_MAIL_PW: ${{ secrets.NAVER_MAIL_PW }}
+    steps:
+      - name: Check required settings
+        shell: bash
+        run: |
+          for name in DOCKER_USERNAME DOCKER_PASSWORD EC2_HOST EC2_USER EC2_KEY DB_URL DB_USERNAME DB_PASSWORD OPENAI_API_KEY GOOGLE_MAIL_ID GOOGLE_MAIL_PW NAVER_MAIL_ID NAVER_MAIL_PW; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Required secret is missing: $name"
+              exit 1
+            fi
+          done
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push Shop
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Shop
+          file: ./Shop/Dockerfile
+          push: true
+          tags: ${{ env.IMAGE }}:${{ env.TAG }}
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          envs: IMAGE,TAG,DB_URL,DB_USERNAME,DB_PASSWORD,OPENAI_API_KEY,GOOGLE_MAIL_ID,GOOGLE_MAIL_PW,NAVER_MAIL_ID,NAVER_MAIL_PW
+          script: |
+            set -eu
+            docker pull "$IMAGE:$TAG"
+            mkdir -p /home/ubuntu/upload/static/file /home/ubuntu/upload/static/upload
+            docker stop shop || true
+            docker rm shop || true
+            docker run -d --restart unless-stopped --name shop -p 8888:8888 \
+              --env DB_URL --env DB_USERNAME --env DB_PASSWORD \
+              --env OPENAI_API_KEY --env GOOGLE_MAIL_ID --env GOOGLE_MAIL_PW \
+              --env NAVER_MAIL_ID --env NAVER_MAIL_PW \
+              -v /home/ubuntu/upload:/app/upload "$IMAGE:$TAG"

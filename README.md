@@ -1,7 +1,7 @@
 # 📚 Study Repository
 
 > **Java & Web Development**를 단계적으로 학습하는 스터디 저장소입니다.  
-> Java 기초부터 SQL, 프론트엔드, JSP, Spring, Spring Boot까지 학습 코드와 실습 프로젝트를 모았습니다.
+> Java 기초부터 SQL, 프론트엔드, JSP, Spring, Spring Boot, 쇼핑몰 배포와 웹 게임까지 학습 코드와 프로젝트를 모았습니다.
 
 <br>
 
@@ -28,7 +28,9 @@ study/
 ├── 📁 Web/           # HTML, CSS, JavaScript, React
 ├── 📁 JSP/           # Servlet, JSP, MVC, MyBatis, AJAX
 ├── 📁 Spring/        # Maven, Lombok, AOP, Spring MVC, 쇼핑몰
-└── 📁 Spring-Boot/   # Spring Boot, JPA, Security, 웹 프로젝트
+├── 📁 Spring-Boot/   # Spring Boot, JPA, Security, 웹 프로젝트
+├── 📁 Shop/          # Spring Boot 쇼핑몰, Docker, EC2 배포
+└── 📁 TenGrid/       # 합이 10이 되는 숫자를 연결하는 웹 게임
 ```
 
 <br>
@@ -43,6 +45,8 @@ study/
 | 4 | 📚 JSP | Servlet, JSP, MVC Model 1·2, MyBatis, jQuery, AJAX, jsoup | [JSP 학습 안내](./JSP/README.md) |
 | 5 | 🌱 Spring | Maven, Lombok, AOP, Chart.js, Spring MVC 쇼핑몰 | [Spring 학습 안내](./Spring/README.md) |
 | 6 | 🚀 Spring Boot | 웹 애플리케이션, JPA, 템플릿 엔진, Spring Security, MyBatis | [Spring Boot 실습](./Spring-Boot/) |
+| 7 | 🛒 Shop | 쇼핑몰, WebSocket, AI 챗봇, Docker, GitHub Actions, EC2 | [Shop 프로젝트 안내](./Shop/README.md) |
+| 8 | 🎮 TenGrid | DOM 이벤트, 드래그 경로, 게임 상태, 점수와 타이머 | [TenGrid 게임 안내](./TenGrid/README.md) |
 
 <br>
 
@@ -84,8 +88,14 @@ study/
 
 기존 학습 저장소의 코드와 커밋 기록은 이 저장소에 통합해 보관합니다.
 
+### 🛒 Shop & 🎮 TenGrid
+
+- [Shop](./Shop/README.md): 회원·상품·게시판·주문·채팅·AI 챗봇을 구현한 Spring Boot 쇼핑몰입니다. 실행 환경과 배포 설정은 프로젝트 안내를 참고하세요.
+- [TenGrid](./TenGrid/README.md): 60초 동안 합이 10인 숫자 경로를 지우는 웹 퍼즐입니다. `TenGrid/index.html`을 브라우저로 열면 실행됩니다.
+- Shop의 공개용 커밋 기록은 민감정보와 빌드 결과물을 제거해 정리했습니다.
+
 <br>
 
-## 🔗 별도 프로젝트
+## 🔗 게임 플레이
 
-[TenGrid 저장소](https://github.com/nhwdev/TenGrid) · [TenGrid 실행하기](https://nhwdev.github.io/TenGrid/)
+[TenGrid 실행하기](https://nhwdev.github.io/study/)

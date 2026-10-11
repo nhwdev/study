@@ -1,0 +1,11 @@
+.git
+.github
+.idea
+.settings
+target
+runtime
+.env
+.env.*
+*local.properties
+*.pem
+*.key
