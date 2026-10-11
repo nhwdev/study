@@ -1,0 +1,160 @@
+# =====================
+# Build Output
+# =====================
+*.class
+*.jar
+*.war
+*.ear
+bin/
+build/
+out/
+target/
+dist/
+dist-ssr/
+
+# =====================
+# Eclipse
+# =====================
+.project
+.classpath
+.settings/
+.metadata/
+RemoteSystemsTempFiles/
+.recommenders/
+.wtpmodules
+wtpwebapps/
+WEB-INF/classes/
+WEB-INF/lib/
+
+# =====================
+# IntelliJ IDEA
+# =====================
+.idea/
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+*.iml
+*.iws
+*.ipr
+META-INF/
+
+# =====================
+# VSCode
+# =====================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+
+# =====================
+# Maven
+# =====================
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# =====================
+# Gradle
+# =====================
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# =====================
+# Spring Boot
+# =====================
+application-local.yml
+application-local.properties
+application-secret.yml
+application-secret.properties
+application-dev.yml
+application-dev.properties
+application-prod.yml
+application-prod.properties
+*.properties.local
+
+# =====================
+# Server (Tomcat)
+# =====================
+Servers/
+.tomcat/
+*.catalina.out
+
+# =====================
+# Database
+# =====================
+*.sql.local
+database.properties
+db.properties
+hibernate.cfg.xml.local
+
+# =====================
+# 환경 변수 / 시크릿
+# =====================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+secrets.properties
+
+# =====================
+# Node.js / React / Vite
+# =====================
+node_modules/
+.pnp
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm
+.vite/
+.swc/
+.turbo/
+.parcel-cache/
+
+# =====================
+# 테스트 / 커버리지
+# =====================
+coverage/
+.nyc_output/
+*.exec
+
+# =====================
+# OS
+# =====================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =====================
+# 로그 / 임시 파일
+# =====================
+*.log
+*.tmp
+*.temp
+*.orig
+*.bak
+logs/
+
+# =====================
+# 캐시
+# =====================
+.eslintcache
+*.tsbuildinfo
+.sass-cache/
+
+# =====================
+# 기타
+# =====================
+*.local
+javascript/gameProject/TenGrid.html

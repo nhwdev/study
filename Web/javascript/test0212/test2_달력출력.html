@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--  webapp/20230324/exam1.html -->
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>달력 출력하기</title>
+	<style type="text/css">
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			border: 3px solid #bcbcbc;
+			text-align: center;
+			padding: 8px;
+		}
+
+		th {
+			background-color: #e2e2e2;
+			color: #111111;
+		}
+
+		td {
+			background-color: #f2f2f2;
+		}
+
+		caption {
+			color: #111111;
+			font-size: 20px;
+			background-color: #ffffff;
+		}
+
+		.text-red {
+			color: red;
+		}
+
+		.text-blue {
+			color: blue;
+		}
+	</style>
+</head>
+
+<body>
+	<select id="y">
+		<option>2023</option>
+		<option>2024</option>
+		<option>2025</option>
+		<option>2026</option>
+		<option>2027</option>
+	</select>
+	<select id="m">
+		<option value="1">1월</option>
+		<option value="2">2월</option>
+		<option value="3">3월</option>
+		<option value="4">4월</option>
+		<option value="5">5월</option>
+		<option value="6">6월</option>
+		<option value="7">7월</option>
+		<option value="8">8월</option>
+		<option value="9">9월</option>
+		<option value="10">10월</option>
+		<option value="11">11월</option>
+		<option value="12">12월</option>
+	</select>
+	<input type="button" value="달력보기" onclick="show_cal()"><br>
+	<span id="cal"></span>
+	<script>
+		function show_cal() {
+			let date = new Date(Number(document.querySelector("#y").value), Number(document.querySelector("#m").value), 0);
+			let e = new Date(Number(document.querySelector("#y").value), Number(document.querySelector("#m").value) - 1, 1)
+
+			let write = ""
+			let html = document.querySelector("#cal")
+			let day = ["일", "월", "화", "수", "목", "금", "토"]
+
+			write = `<table border=1px><caption>${document.querySelector("#y").value}년 ${document.querySelector("#m").value}월</caption><tr>`
+			for (let i = 0; i < day.length; i++) {
+				write += `<th>${day[i]}</th>`
+			}
+			write += "<tr>"
+			for (let i = 0; i < date.getDate() + e.getDay(); i++) {
+				if (i < e.getDay()) {
+					write += "<td></td>"
+				} else {
+					if (i % 7 == 0) write += `<tr>`
+					write += "<td>" + (i+1-Number(e.getDay())) + "</td>"
+					if (i % 7 == 6) write += `</tr>`
+				}
+			}
+			write += "</tr>"
+			write += "</table>"
+			html.innerHTML = write
+		}
+	</script>
+</body>
+
+</html>

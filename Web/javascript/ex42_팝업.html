@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업</title>
+</head>
+
+<body>
+    <input type="button" id="btn_open" value="창열기">
+    <input type="button" id="btn_close" value="창닫기">
+    <div id="area1"></div>
+    <script>
+        let nwin
+        document.getElementById("btn_open").addEventListener('click', () => {
+            let width = 480
+            let height = 360
+            console.log("화면너비: ", screen.width)
+            console.log("화면높이: ", screen.height)
+            console.log("실제 화면 너비: ", screen.availWidth)
+            console.log("실제 화면 높이: ", screen.availHeight)
+            // 새 창의 위치
+            let left = (screen.width - width) / 2
+            let top = (screen.height - height) / 2
+            /* 
+            * width : 새 창의 너비
+            * height : 새 창의 높이
+            * left : 창의 왼쪽 위치
+            * top : 창의 위쪽의 위치
+            */
+            let feature = `width=${width}, height=${height}, left=${left}, top=${top}`
+            /* 
+            * window.open(새 창의 url, 새 창의 이름, 옵션): 현재 창에서 새 창 열기
+            * nwin : 새창의 id 값. 새창의 window 객체
+            */
+            nwin = window.open('ex43_팝업_win.html', '', feature)
+
+        })
+        document.querySelector("input[value='창닫기']").addEventListener('click', () => {
+            document.querySelector("#area1").innerHTML = "새창 닫기"
+            nwin.close()
+        })
+    </script>
+</body>
+
+</html>

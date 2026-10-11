@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 연습</title>
+</head>
+<body>
+    <p>두개의 수를 입력받아서 두수의 합이 짝수인 경우 짝수를 홀수인 경우 홀수 메세지를 #result에 출력하기</p>
+    <input type="text" id="num1"> + <input type="text" id="num2"> = <input type="text" id="add">
+    <button type="button" onclick="calc()">계산하기</button>
+    <div id="result"></div>
+    <script>
+        function calc(){
+            let num1 = document.querySelector("#num1").value;
+            let num2 = document.querySelector("#num2").value;
+            let add = Number(num1) + Number(num2)
+            document.querySelector("#add").value = add
+            if(add % 2 == 0) document.querySelector("#result").innerHTML = "<h2>짝수입니다</h2>"
+            else document.querySelector("#result").innerHTML ="<h2>홀수입니다</h2>"
+        }   
+    </script>
+</body>
+</html>

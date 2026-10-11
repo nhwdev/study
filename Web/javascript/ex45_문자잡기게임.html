@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자 잡기 게임</title>
+</head>
+
+<body>
+    <script>
+        function nextRandomInteger(limit) {
+            return Math.round(Math.random() * limit) // 0 ~ limit 까지의 임의의 수 리턴
+        }
+        function randomSpeed(maxSpeed) { // 2 : -2 ~ 2
+            return Math.random() * maxSpeed - Math.random() * maxSpeed
+        }
+        const canvasWidth = 300
+        const canvasHeight = 200
+        let total = 15
+        function MovingText() { // 생성자 함수
+            // 페이지에서 😜의 위치
+            this.x = nextRandomInteger(canvasWidth) // 0 ~ 700 사이의 임의의 수
+            this.y = nextRandomInteger(canvasHeight) // 0 ~ 500 사이의 임의의 수
+            // vX: 가로이동, vY: 세로이동
+            this.vX = randomSpeed(7)
+            this.vY = randomSpeed(7)
+            this.body = document.createElement("h1") // <h1></h1>
+            this.body.innerHTML = '😜' // <h1>😜</h1>
+            // <h1 style='background-color:white'>😜</h1>
+            this.body.setAttribute("style", "background-color:white")
+            // <h1 style='background-color:white; position:absolute'>😜</h1>
+            this.body.style.position = "absolute"
+            let text = this.body
+            this.body.onclick = function () {
+                if (text.innerHTML == '😢') return // 클릭시 return : 아무런 기능도 안함
+                // text.innerHTML == '😜' 인 경우만 실행됨
+                --total // 😜의 갯수를 빼기.
+                alert(`남은 문자 수 : ${total}`)
+                text.innerHTML = '😢'
+            }
+            document.body.appendChild(this.body)
+        }
+        // MovingText 클래스의 move 함수 정의
+        MovingText.prototype.move = function () {
+            // this.body : h1 태그
+            if (this.body.innerHTML == '😢') return // move 되지 않음
+            // this.body.innerHTML == '😜'인 경우만 실행
+            if (this.x < 0 || this.x > canvasWidth) { // 0 ~ canvasWidth 까지 유지
+                this.vX *= -1 // 부호를 변경
+            }
+            if (this.y < 0 || this.y > canvasHeight) { // 0 ~ canvasHeight 까지 유지
+                this.vY *= -1 // 부호를 변경
+            }
+            this.x += this.vX // 위치 변경. vX만큼
+            this.y += this.vY // 위치 변경. vY만틈
+            // < h1 style = 'background-color:white; positon:absolute; left:3px;top:50px' >😜</h1 >
+            this.body.style.left = this.x + "px"
+            this.body.style.top = this.y + "px"
+        }
+        // window.onload : 화면이 준비되면
+        onload = function () {
+            let movingTexts = [] // 배열
+            for (let i = 0; i < total; i++) { // 10번 반복
+                movingTexts.push(new MovingText()) // 배열에 추가
+            }
+            let game = setInterval(() => { // 1초에 60번 함수 실행, 콜백 함수
+                // movingTexts : 10개의 MovingText 객체를 저장
+                for (let i in movingTexts) {
+                    if (total < 4) {
+                        alert("게임종료")
+                        clearInterval(game) // setInterval 함수 정지
+                        return // 함수 종료
+                    }
+                    movingTexts[i].move() // 1초에 60번 move() 함수 호출
+                }
+            }, 1000 / 60)
+        }
+    </script>
+</body>
+
+</html>

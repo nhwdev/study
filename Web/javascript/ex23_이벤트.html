@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <style>
+        .area {
+            background-color: lightgray;
+            border: 5px solid black;
+            width: 500px;
+            height: 100px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>이벤트</h1>
+    <h3>기본이벤트</h3>
+    <button id="btn1">실행확인1</button>
+    <button id="btn2">실행확인2</button>
+    <div id="area1" class="area"></div>
+    <script>
+        const area1 = document.querySelector("#area1")
+        document.querySelector("#btn1").onclick = /* 이벤트 핸들러 → */ function () {
+            area1.innerHTML += "btn1 버튼이 클릭되었습니다.<br>"
+        }
+        document.querySelector("#btn2").onclick = function () {
+            area1.innerHTML += "btn2 버튼이 클릭되어 btn1 이벤트를 제거합니다.<br>"
+            document.querySelector("#btn1").onclick = null // 등록된 이벤트 핸들러를 제거
+        }
+    </script>
+    <hr>
+    <!-------------------------------------------------------------------->
+    <h3>인라인 방식으로 이벤트 처리</h3>
+    <p>요소 내부의 직접 이벤트 속성 정의하는 방식</p>
+    <button onclick="document.querySelector('#area2').innerHTML += '실행확인1 버튼 클릭<br>'">실행확인1</button>
+    <button onclick="btn2click()">실행확인2</button>
+    <div id="area2" class="area"></div>
+    <script>
+        function btn2click() {
+            document.querySelector("#area2").innerHTML += '실행확인2 버튼 클릭. 실행확인1 버튼 이벤트 제거'
+            document.querySelectorAll("button")[2].onclick = null;
+        }
+    </script>
+    <hr>
+    <!-------------------------------------------------------------------->
+    <h3>표준 이벤트 모델(addEventListener)</h3>
+    <p>w3c에서 공식적으로 지정한 이벤트 모델</p>
+    <button id="btn3">실행확인</button>
+    <script>
+        const btn3 = document.querySelector("#btn3")
+        btn3.addEventListener('click', function () {
+            alert('표준 이벤트 모델 테스트')
+        })
+        btn3.addEventListener('mouseenter',function(){
+            btn3.style.backgroundColor = 'red'
+        })
+        btn3.addEventListener('mouseout',function(){
+            btn3.style.backgroundColor = null
+        })
+    </script>
+    <hr>
+    <!-------------------------------------------------------------------->
+    <h3>이벤트가 발생한 요소를 찾기 위한 방법</h3>
+    <button id="btn4" class="btn">기본 이벤트 방식</button>
+    <button id="btn5" class="btn">표준 이벤트 방식</button>
+    <button onclick="test1()">인라인 이벤트 방식1</button>
+    <button onclick="test2(this)">인라인 이벤트 방식2</button>
+    <button onclick="test3(this)">인라인 이벤트 방식3</button>
+    <script>
+        document.querySelector("#btn4").onclick = function (e) {
+            // e : 이벤트 객체. 이벤트가 발생한 요소의 정보 저장하고 있는 객체
+            console.log(e)
+            // 이벤트가 발생된 객체. <button id="btn4" class="btn">버튼 ✔</button>
+            console.log("e.target:", e.target)
+            console.log("window.event: ", window.event) // window.event : 이벤트 객체
+            console.log("window.event.target: ", window.event.target) // 이벤트가 발생된 객체. 이벤트 소스
+            console.log("this: ", this) // 이벤트가 발생된 객체. 이벤트 소스. 현재 객체
+            e.target.innerHTML = '버튼 ✔'
+            window.event.target.style.backgroundColor = "red"
+            this.style.color = "white"
+        }
+        document.querySelector("#btn5").addEventListener('click', function (e){
+            console.log("e.target: ", e.target)
+            console.log("window.event.target: ", window.event.target)
+            console.log("this: ", this)
+        })
+        function test1() {
+            console.log("window.evnet.target: ", window.event.target) // 이벤트 소스
+            window.event.target.innerHTML = "버튼 ✔"
+            console.log("this: ", this) // window 객체임. 이벤트소스가 아님
+        }
+        function test2(btn){
+            // btn : 이벤트 소스
+            btn.innerHTML = "test2 함수에서 변경함"
+            btn.style.backgroundColor = "blue"
+            console.log("this:", this) // window 객체임
+        }
+        // test3 함수 구현하기. test3 함수에서 변경함. 버튼문자 변경. 노랑배경, 파란글씨
+        function test3(btn){
+            btn.innerHTML = "test3 함수에서 변경함"
+            btn.style.backgroundColor = "yellow"
+            btn.style.color = "blue"
+            // window.event.traget.innerHTML = "test3 함수에서 변경함"
+            // window.event.traget.style.backgroundColor = "yellow"
+            // window.event.traget.style.color = "blue"
+        }
+        </script>
+        <!-------------------------------------------------------------------->
+        <!--
+        * 기본 방식 이벤트에서 사용되는 이벤트 종류
+        * 1. 마우스 터치 관련
+        *   (1) onclick : 클릭
+        *   (2) ondblclick : 더블 클릭
+        *   (3) onmousedown / onmouseup : 버틀을 누름 / 버튼을 뗌
+        *   (4) onmouseenter / onmouseleave(onmouseout) : 영역안에 들어옴 / 나감
+        *   (5) onmousemove : 마우스가 움직임
+        *   (6) oncontextmenu : 오른쪽 버튼 클릭
+        * 2. 키보드 및 입력폼 관련
+        *   (1) onkeydown / onkeyup : 키를 누름 / 키를 뗌
+        *   (2) oninput : 값이 변경될 때(실시간)
+        *   (3) onchange : 값이 변경될 때 (포커스를 잃었을 때). checkbox 또는 select 박스 등
+        *   (4) onsubmit : form 전송될 때. form 태그에서 발생되는 이벤트. submit 버튼이 클릭된 경우
+        *   (5) onfocus / onblur : 포커스를 얻엇을 때 / 포커스를 잃었을 때
+        * 3. 페이지 및 리소스 관련
+        *   (1) onload : 리소스의 로드가 완료된 경우
+        *   (2) onresize : 브라우저 창 크기가 변경될 때
+        *   (3) onscroll : 스크롤바를 움직일 때
+        *   (4) onerror : 리소스 로드시 에러 발생 시
+        * 표준 이벤트 처리 방식 : addEventListener('click', function)
+        * 1. 마우스 관련 이벤트
+        *   (1) click
+        *   (2) dbclick
+        *   (3) mousedown / mouseup
+        *   (4) mouseenter / mouseleave
+        *   (5) mousemove
+        *   (6) contextmenu
+        * 2. 키보드 관련 이벤트
+        *   (1) keydown / keyup
+        *   (2) keypress : keydown을 권장. 사용하지 않도록 권장
+        *   (3) submit
+        *   (4) change
+        *   (5) input
+        *   (6) focus / blur
+        * 3. 페이지 및 리소스 관련 이벤트
+        *   (1) load
+        *   (2) resize
+        *   (3) scroll
+        *   (4) DOMContentLoaded : DOM 트리가 완성된 경우 이미지 로드 전
+        -->
+        <script>
+        </script>
+        
+</body>
+
+</html>

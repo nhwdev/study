@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업_win</title>
+    <style>
+        .img {
+            width: 460px;
+            height: 310px;
+            background-image: url(img/apple.gif);
+            background-size: 460px 310px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img"></div>
+    <button id="btn_close">닫기</button>
+    <script>
+        document.querySelector("#btn_close").addEventListener('click', () => {
+            /* 
+            * ex_팝업.html 페이지에서 open 된 경우
+            * opner 예약어 : 현재 페이지를 open 한 페이지(ex42_팝업.html)의 window 객체
+            */
+            opener.document.querySelector("#area1").innerHTML = 'open 된 페이지에서 self close'
+            // window.close() // 현재 창 닫기
+            // self.close()   // 창 닫기
+            close() // 창닫기. window 생략 가능
+        })
+    </script>
+</body>
+
+</html>

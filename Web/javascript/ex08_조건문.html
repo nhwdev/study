@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+    <div>
+        <div>국어점수 <span id="kor">80</span>점</div>
+        <div>영어점수 <span id="eng">50</span>점</div>
+        <div>수학점수 <span id="math">50</span>점</div>
+    </div>
+    <div>
+        <div>평균점수 <span id="average"></span>점</div>
+        <div>학점 <span id="grade"></span>학점</div>
+        <div id="pass"></div>
+    </div>
+    <script>
+        // textContent : 태그의 값을 문자열로 리턴
+        // getElementById(id속성값) : id 속성값을 가지고 있는 태그 한개
+        // getElementsByClassName(class속성값) : class 속성값을 가지고 있는 모든 태그들 => 배열형식
+        // let kor = document.getElementById("kor").textContent
+        // ES6 이후에 추가된 함수
+        // querySelector(선택자 표시) : 선택자로 표현된 태그 한개 리턴
+        // querySelectorAll(선택자표시) ;선택자로 표현된 태그들 전부 리턴
+        // document.querySelector("#kor") : id 속성값이 kor인 태그 한개 리턴
+        let kor = document.querySelector("#kor").textContent // 60
+        // console.log(kor)
+        let eng = document.querySelector("#eng").textContent // 50
+        let math = document.querySelector("#math").textContent // 50
+        let avg = (Number(kor) + Number(eng) + Number(math)) / 3
+        document.querySelector("#average").textContent = avg.toFixed(2) // toFixed(정수) : 소수점 (정수)자리수 까지 반올림
+        if (avg >= 90) grade = 'A'
+        else if (avg >= 80) grade = 'B'
+        else if (avg >= 70) grade = 'C'
+        else if (avg >= 60) grade = 'D'
+        else grade = 'F';
+        document.querySelector("#grade").textContent = grade
+        // id = pass 인 영역에 60점이상이면 학점취득, 아니면 재수강요망 출력
+        if(avg >= 60) document.querySelector("#pass").innerHTML = "<h1>학점취득</h1>"
+        else document.querySelector("#pass").textContent = "<h1 style='color:red'>재수강요망</h1>"
+    </script>
+</body>
+</html>

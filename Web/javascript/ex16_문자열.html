@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 연습</title>
+    <style>
+        .area {
+            width: 500px;
+            border: 1px solid black;
+            overflow: auto;
+        }
+
+        .big {
+            height: 500px;
+        }
+
+        .small {
+            height: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>문자열 관련 함수</h3>
+    <button onclick="stringTest()">문자열 처리 함수</button>
+    <div class="area big" id="area1"></div>
+    <script>
+        function stringTest() {
+            const divEl = document.querySelector("#area1")
+            let str1 = "Hello World"
+            divEl.innerHTML += `str1: ${str1}<br>`
+            divEl.innerHTML += `toUpperCase: ${str1.toUpperCase()}<br>`
+            divEl.innerHTML += `toLowerCase: ${str1.toLowerCase()}<br>`
+            divEl.innerHTML += `문자열 길이: ${str1.length}<br>`
+            // charAt(i) : i번 인덱스의 문자한게 리턴
+            for (let i = 0; i < str1.length; i++)
+                divEl.innerHTML += `${i}번째 인덱스 문자: ${str1.charAt(i)}<br>`
+            // indexOf(문자) : 문자의 인덱스 값 리턴. 없는 경우 -1
+            divEl.innerHTML += `l문자의 위치<br>: ${str1.indexOf('l')}<br>`
+            let i = 0
+            divEl.innerHTML += `뒤쪽의 1문자의 위치: ${str1.lastIndexOf('1')}<br>`
+            divEl.innerHTML += `3번 인덱스 부터 1문자의 위치: ${str1.indexOf('1', 3)}<br>`
+            divEl.innerHTML += `a문자의 위치: ${str1.indexOf('a')}<br>`
+            /* 
+            * 부분 문자열
+            *   1. substring(시작인덱스, 종료인덱스 +1)
+            *   2. substr(시작 인덱스, 글자갯수)
+            */
+            divEl.innerHTML += `substr(시작인덱스): ${str1.substr(6)}<br>`
+            divEl.innerHTML += `substr(시작인덱스, 글자수): ${str1.substr(1, 2)}<br>`
+            divEl.innerHTML += `substring(시작인덱스): ${str1.substring(6)}<br>`
+            divEl.innerHTML += `substring(시작인덱스, 종료인덱스+1): ${str1.substring(1, 2)}<br>`
+            /*
+            * startWtih(문자) : 문자로 시작?
+            * endsWith(문자)  : 문자로 종료?
+            */
+            divEl.innerHTML += `startsWith(문자): ${str1.startsWith('H')}<br>`
+            divEl.innerHTML += `endsWith(문자): ${str1.endsWith('d')}<br>`
+            /*
+            * 문자치환 
+            *   1. replace(원본문자, 치환문자) : 원본문자 중 한개만 치환문자로 변경
+            *   2. replaceAll(원본문자, 치환문자) : 원본문자 중 모든 문자를 치환문자로 변경
+            */
+            let str2 = "JavaJavaJavaJava"
+            divEl.innerHTML += `replace(원본문자,치환문자): ${str2.replace('Java', '자바')}<br>`
+            divEl.innerHTML += `replaceAll(원본문자,치환문자): ${str2.replaceAll('Java', '자바')}<br>`
+            /*
+            * split(분리문자) : 문자열을 분리문자로 나누어 배열로 리턴
+            */
+            let str3 = "사과, 바나나, 복숭아, 키위"
+            let fruits = str3.split(",")
+            for (let i = 0; i < fruits.length; i++) {
+                divEl.innerHTML += `fruits[${i}]:${fruits[i]}<br>`
+            }
+            divEl.innerHTML += `fruits: ${fruits}<br>`
+            divEl.innerHTML += `fruits의 자료형: ${typeof (fruits)}<br>`
+            divEl.innerHTML += `fruits의 요소의 갯수: ${fruits.length}<br>`
+            /* 
+            * join(연결문자) : 배열의 요소를 연결문자로 연결하여 문자열로 리턴
+            */
+            divEl.innerHTML += `fruits를 문자열로: ${fruits.join("-")}<br>`
+        }
+    </script>
+    <hr>
+    <h3>문자열의 html 관련 함수</h3>
+    <button onclick="stringHTMLTest()">문자열의 html관련 함수</button>
+    <div id="area2" class="area small"></div>
+    <script>
+        function stringHTMLTest() {
+            const divEl = document.querySelector("#area2")
+            let str = "javascript"
+            divEl.innerHTML = `str:${str}<br>`
+            divEl.innerHTML += `bold():${str.bold()}<br>` 
+            divEl.innerHTML += `italic():${str.italics()}<br>`
+            divEl.innerHTML += `sub(),sup():${str.sub()}, ${str.sup()}<br>`
+            divEl.innerHTML += `link():${str.link('https://www.naver.com')}<br>`
+        }
+    </script>
+</body>
+
+</html>

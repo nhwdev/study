@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 연습</title>
+</head>
+
+<body>
+    <p>
+        0 ~ 9 사이의 임의의 수 2개와 임의의 연산자(+, -, *, /, %)를 이용하여 수식을 만들고, 수식을 prompt 창에 출력하기<br>
+        prompt 창에서 결과를 입력받아 정답인 경우 "정답입니다."를 출력하고, 틀린경우 "틀렸습니다. 정답은 xxx 입니다."를 출력하기<br>
+        (1) getNumber() : 0 ~ 9 사이의 임의의 정수를 리턴하는 함수 <br>
+        (2) getOp() : let op = ['+','-','*','/','%'] 에서 연산자 중 임의의 연산자를 리턴하는 함수 <br>
+        (3) 결과는 document.write() 함수로 출력하기
+    </p>
+    <script>
+        let str = `${getNumber()} ${getOp()} ${getNumber(0)}` // 수식 생성
+        let ans = prompt(`${str} = 정답을 입력하세요`, 0)
+        let result = eval(str)
+        if (ans == result) {
+            document.write(`<h3>${ans}은(는) 정답입니다.</h3>`)
+        } else {
+            document.write(`<h3>틀렸습니다. 정답: ${result} 입니다. </h3>`)
+        }
+        function getNumber() { // 호이스팅 가능
+            return Math.floor(Math.random() * 10)
+        }
+        function getOp() { // 호이스팅 가능
+            let op = ['+', '-', '*', '/', '%']
+            return op[Math.floor(Math.random() * op.length)]
+        }
+        document.write(num1 + op + num2)
+    </script>
+</body>
+
+</html>

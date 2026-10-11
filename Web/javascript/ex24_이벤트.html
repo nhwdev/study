@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+</head>
+<body>
+    <h2>Key 이벤트</h2>
+    <p>
+        - keydown  : 키보드에서 키를 누를 때, 모든 키에서 이벤트 발생<br>
+        - keypress : 키를 누르고 있을 때. function 키, 기능키 이벤트 발생❌. 사용하지 않는것을 권장<br>
+        - keyup    : 키에서 손을 땔 때, 모든 키에서 이벤트 발생<br>
+    </p>
+    <input type="text" id="userName">
+    <script>
+        document.getElementById("userName").onkeyup = function (e) {
+            console.log(this.value) // this : 이벤트 소스. this.value : 입력된 데이터
+            console.log(e.key) // 입력된 키 값
+            console.log(e.keyCode) // 입력된 키의 코드 값
+        }
+    </script>
+</body>
+</html>

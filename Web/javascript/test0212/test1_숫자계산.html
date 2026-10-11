@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자계산</title>
+</head>
+
+<body>
+    <p>
+        다음 보기에 있는 숫자들의 합을 result에 출력하세요
+    </p>
+    <fieldset>
+        <legend>보기</legend>
+        <label id="la1">10,2,30,4,50,6,70,8,90,10</label>
+    </fieldset>
+    <br>
+    <div id="result"></div>
+    <script>
+        let arr = document.querySelector("#la1").innerHTML.split(",")
+        let result = document.querySelector("#result") 
+        let sum = 0
+        result.innerHTML = document.querySelector("#la1").innerHTML + "의 합: "
+        for(let i=0; i < arr.length; i++){
+            sum += Number(arr[i])
+        }
+        result.innerHTML += sum
+    </script>
+</body>
+
+</html>

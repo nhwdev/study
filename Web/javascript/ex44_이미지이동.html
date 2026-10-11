@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 이동하기</title>
+    <style>
+        .droptarget {
+            float: left;
+            min-width: 400px;
+            min-height: 200px;
+            margin: 15px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+    *   ondragover : drag된 요소가 내 영역내에 존재
+    *   ondrop : drag 된 요소가 drop 된 경우
+    -->
+    <div class="droptarget" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <!-- 
+        *   ondragstart : drag 시작
+        *   ondragend : drag 종료
+        *   draggable="true" : drag 이벤트 발생 가능. 기본값
+        -->
+        <img src="img/apple.gif" ondragstart="dragStart(event)" width="100" ondragend="dragEnd(event)" draggable="true"
+            id="dragtarget1">
+        <img src="img/banana.jpg" ondragstart="dragStart(event)" width="100" ondragend="dragEnd(event)" draggable="true"
+            id="dragtarget2">
+        <p ondragstart="dragStart(event)" ondragend="dragEnd(event)" draggable="true" id="dragtarget3">이동해주세요</p>
+        <h1 ondragstart="dragStart(event)" ondragend="dragEnd(event) " draggable="true" id="dragtarget4">이동해주세요</h1>
+    </div>
+    <div class="droptarget" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <script>
+        let demo1 = document.querySelector("#demo1")
+        let demo2 = document.querySelector("#demo2")
+        function dragStart(event) { // drag 되는 요소에서 발생되는 이벤트
+            /* 
+            * event.target.id : drag 되는 요소의 id 속성값
+            * text : drag 되는 요소의 id 속성값 저장
+            */
+            event.dataTransfer.setData('text', event.target.id)
+            demo1.innerHTML = "이동을 시작합니다."
+        }
+        function dragEnd(evnet) {
+            demo1.innerHTML = "이동이 완료되었습니다."
+        }
+        function allowDrop(evnet) { // div 태그의 이벤트
+            event.preventDefault() // 기본 이벤트 취소
+            demo2.innerHTML = "drag over 시작입니다."
+        }
+        function drop(event) { // div 태그의 이벤트
+            event.preventDefault()
+            // event.dataTransfer : drag and drop 기능 구현시 drag 중인 요소
+            let data = event.dataTransfer.getData("text")
+            event.target.appendChild(document.getElementById(data))
+            demo2.innerHTML = "drag drop 이벤트가 발생"
+        }
+    </script>
+</body>
+
+</html>

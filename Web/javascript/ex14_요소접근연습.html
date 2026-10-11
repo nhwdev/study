@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소 접근 연습</title>
+</head>
+
+<body>
+    <p>
+        btn1 버튼클릭하면 name=month인 select 태그를 생성하기
+        option 태그는 1월 ~ 12월까지 출력하기
+    </p>
+    <hr>
+    <div id="box1"></div>
+    <button type="button" id="btn1">select태그 추가하기</button>
+    <script>
+        document.getElementById("btn1").onclick = function () {
+            let html = "<select name='month' style='width:20%'>"
+            for (let m = 1; m <= 12; m++) {
+                html += `<option>${m}월</option>`
+            }
+            html += "</select>"
+            document.querySelector("#box1").innerHTML = html
+        }
+    </script>
+</body>
+
+</html>

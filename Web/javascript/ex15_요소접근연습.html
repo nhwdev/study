@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소 접근 연습</title>
+</head>
+
+<body>
+    <p>
+        nums 폴더의 이미지 num0.jpg ~ num9.jpg 이미지를 화면에 출력하기<br>
+        2행 5열의 테이블 생성하여 각각의 셀에 이미지를 넣어 #box1에 출력하기
+    </p>
+    <div id="box1"></div>
+    <script>
+        let html = "<table>"
+        for (let i = 0; i <= 9; i++) {
+            html += (i == 0 || i == 5) ? `<tr><td><img src="nums/num${i}.jpg"></td>` : `<td><img src="nums/num${i}.jpg"></td>`
+        }
+        html += "</table>"
+        document.querySelector("#box1").innerHTML = html
+    </script>
+</body>
+
+</html>

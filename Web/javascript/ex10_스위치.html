@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스위치</title>
+</head>
+<body>
+        <div>
+        <div>국어점수 <span id="kor">80</span>점</div>
+        <div>영어점수 <span id="eng">50</span>점</div>
+        <div>수학점수 <span id="math">50</span>점</div>
+    </div>
+    <div>
+        <div>평균점수 <span id="average"></span>점</div>
+        <div>학점 <span id="grade"></span>학점</div>
+        <div id="pass"></div>
+    </div>
+    <script>
+        let kor = document.querySelector("#kor").textContent
+        let eng = document.querySelector("#eng").textContent
+        let math = document.querySelector("#math").textContent 
+        let avg = (Number(kor) + Number(eng) + Number(math)) / 3
+        document.querySelector("#average").textContent = avg.toFixed(2)
+        // JavaScript에서 사용되는 switch 구문 -> Java와 다른점
+        switch(true){
+            case avg >= 90 : grade='A'; bread;
+            case avg >= 80 : grade='B'; bread;
+            case avg >= 70 : grade='C'; bread;
+            case avg >= 60 : grade='D'; bread;
+            default : grade='F'; bread;
+            
+        }
+        documetn.querySelector("#grade").textContent = grade
+        switch(true){
+            case avg >= 60 :
+                document.querySelector("#pass").innerHTML = "<h1>학점취득</h1>"
+                break
+            dafault :
+                document.querySelector("#pass").textContent = "<h1 style='color:red'>재수강요망</h1>"
+        }
+    </script>
+</body>
+</html>

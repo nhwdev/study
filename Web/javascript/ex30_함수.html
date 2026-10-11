@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+    <style>
+        .area {
+            border: 2px solid black;
+            width: 500px;
+            height: 200px;
+            overflow: auto;
+        }
+
+        button {
+            width: 98px;
+            height: 50px;
+            font-size: 19px;
+        }
+
+        ol,
+        li,
+        ul {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>선언 함수</h1>
+    <ul>
+        <li>함수의 이름이 있다</li>
+        <li>함수의 정의와 호출로 구분함</li>
+        <li>호이스팅 대상임</li>
+    </ul>
+    <button onclick="test1()">실행확인</button>
+    <div class="area" id="area1"></div>
+    <script>
+        function test1() {
+            document.querySelector("#area1").innerHTML = "test1 함수가 호출됨"
+        }
+    </script>
+    <h1>익명 함수 : 이름이 없는 함수</h1>
+    <p>
+        변수 | 속성 = function([매개변수, ...]){ <br>
+        함수 호출시 실행할 소스 코드들 <br>
+        } <br>
+        특정 변수나 속성에 대입되는 함수 구현시 주로 사용됨 <br>
+        주로 이벤트 핸들러 작성시 많이 사용 <br>
+    <ul>
+        <li>이름이 없는 함수</li>
+        <li>이벤트 처리용으로 변수에 익명함수를 저장해서 사용함</li>
+        <li>호이스팅 대상이 아님</li>
+        <li>함수 정의 방식</li>
+        <ol>
+            <li>
+                일반 익명함수<br>
+                let val1 = function([매개변수...]) {...}
+            </li>
+            <li>
+                화살표(=>) 함수<br>
+                let val1 = ([매개변수...]) => {...}
+            </li>
+        </ol>
+    </ul>
+    </p>
+    <button id="btn">실행확인</button>
+    <div class="area" id="area2"></div>
+    <script>
+        document.getElementById("btn").onclick = function () {
+            document.getElementById("area2").innerHTML = "익명의 함수로 이벤트 핸들러를 구현함1"
+        }
+        // 화살표함수 : 람다방식
+        document.getElementById("btn").onclick = (e) => {
+            document.getElementById("area2").innerHTML = "익명의 함수로 이벤트 핸들러를 구현함<br>"
+            document.getElementById("area2").innerHTML += e.target.innerHTML
+        }
+    </script>
+    <h1>함수의 매개변수</h1>
+    <button onclick="test2('안녕')">실행확인1</button>
+    <button onclick="test2(10)">실행확인2</button>
+    <button onclick="test2([10,20,30])">실행확인3</button>
+    <!-- 정의된 매개변수의 갯수보다 전달된 인자값이 많은 경우에도 오류발생 안함 -->
+    <button onclick="test2('안녕', '홍길동')">실행확인4</button>
+    <!-- 정의된 매개변수의 갯수보다 전달된 인자값이 적은 경우. 오류발생 안함. 매개 변수값은 초기화 되지 않음 -->
+    <button onclick="test2()">실행확인5</button>
+    <div class="area" id="area3"></div>
+    <script>
+        function test2(value) {
+            console.log(arguments) // arguments : 함수에 전달된 매개변수 리스트
+            document.getElementById("area3").innerHTML = arguments[0] + "<br>" // 첫번째 매개변수 값
+            document.getElementById("area3").innerHTML += arguments[1] + "<br>" // 두번째 매개변수 값
+            document.getElementById("area3").innerHTML += value + "<br>" // 입력받은 매개변수 값
+        }
+    </script>
+    <h1>함수의 리턴</h1>
+    <button onclick="alert(ran())">실행 확인</button>
+    <ol>
+        <li>리턴 타입의 선언이 필요 없다. 자료형에 상관없이 반환이 가능함</li>
+        <li>return 키워드(예약어)로 함수를 종료함. 함수의 끝(})을 실행하면 함수가 종료</li>
+        <li>값이 반환하는 경우 : return 필수</li>
+        <ol>
+            <li>return 값</li>
+            <li>return 리턴이 있는 함수()</li>
+        </ol>
+    </ol>
+    <script>
+        function ran() {
+            // 1 ~ 100 사이의 임의의 값 리턴
+            return Math.ceil(Math.random() * 100)
+        }
+    </script>
+</body>
+
+</html>

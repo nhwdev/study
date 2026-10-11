@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머 관련 함수</title>
+</head>
+
+<body>
+    <h3>setTimeout 함수</h3>
+    <ul>
+        <li>정해진 시간 이후 한번 동작하는 함수</li>
+        <li>let id = setTimeout(함수, 밀리초) : 밀리초 이후에 함수를 한번 실행</li>
+    </ul>
+    <script>
+        let timeid = setTimeout(function () {
+            alert("5초 후 출력")
+        }, 5000)
+    </script>
+    <hr>
+    <h3>setInterval 함수</h3>
+    <ul>
+        <li>정해진 시간 마다 반복해서 동작하는 함수</li>
+        <li>let id = setInterval(함수, 밀리초) : 밀리초마다 함수를 반복해서 실행</li>
+        <li>clearInterval(id) : setInterval 함수로 설정된 함수를 중지</li>
+    </ul>
+    <script> // JavaScript는 병렬처리를 한다. setInterval 함수와 setTimout함수가 동시에 처리
+        let n = 0;
+        // 1초에 한번씩 n 변수 값을 증가 하면서 콘솔에 출력
+        timerid = setInterval(function () { console.log(n++); }, 1000)
+        // 5초 후에 setInterval 함수를 중지
+        setTimeout(function () {
+            clearInterval(timerid) // timerid의 setInterval 함수를 중지
+            console.log(timerid + "중지")
+        }, 5000)
+    </script>
+</body>
+
+</html>

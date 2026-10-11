@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 연습</title>
+</head>
+
+<body>
+    <p>select 태그를 선택하여 value 값의 이미지로 변경하기</p>
+    <form name="f">
+        <table>
+            <tr>
+                <td><select name="s" onchange="drawing()">
+                        <option value="strawberry.gif">딸기</option>
+                        <option value="banana.jpg">바나나</option>
+                        <option value="apple.gif">사과</option>
+                    </select></td>
+                <td><img src="img/strawberry.gif" name="fimg" width="100"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function drawing() {
+            // querySelector(선택자) 활용 ----------------------------
+            // let img = document.querySelector("img[name=fimg]")
+            // let sel = document.querySelector("select[name=s]")
+            // img.src = "img/" + sel.value
+            // getElementsByTagName 활용 -----------------------------
+            // let img = document.getElementsByTagName("img")[0]
+            // let sel = document.getElementsByTagName("select")[0]
+            // img.src = "img/" + sel.value
+            // getElementsByName 활용 --------------------------------
+            // let img = document.getElementsByName("fimg")[0]
+            // let sel = document.getElementsByName("s")[0]
+            // img.src = "img/" + sel.value
+            // BOM 트리 구조로 접근 : name 속성을 이용함 --------------
+            let img = document.fimg; // document.name 속성 값
+            let sel = document.f.s 
+            img.src = "img/" + sel.value
+        }
+    </script>
+</body>
+
+</html>

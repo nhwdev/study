@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시계 만들기</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <p>초가 50 ~ 59초는 시계 색상을 빨강색으로 변경하기</p>
+    <h1 id="watch">
+        현재시간은
+        <span id="year"></span>년
+        <span id="month"></span>월
+        <span id="day"></span>일
+        <span id="hour"></span>시
+        <span id="minute"></span>분
+        <span id="second"></span>초 입니다.
+    </h1>
+    <script>
+        // setInterval() : 1초마다 function을 실행
+        // setTimeout() : 1초 후에 실행
+        setInterval(function () {
+            let now = new Date()
+            document.querySelector("#year").innerHTML = now.getFullYear()
+            document.querySelector("#month").innerHTML = now.getMonth() + 1
+            document.querySelector("#day").innerHTML = now.getDay()
+            document.querySelector("#hour").innerHTML = now.getHours()
+            document.querySelector("#minute").innerHTML = now.getMinutes()
+            document.querySelector("#second").innerHTML = now.getSeconds()
+            /*
+            * 태그명. style.color : <태그 style="color:red"> → style 속성을 변경
+            * 요소.className : <태그 class="className"> → class 속성 값 등록
+            * 요소.setAttribute(속성명, 속성값) : 속성 등록 함수
+            * 요소.removeAttribute(속성명) : 속성을 제거
+            */
+            if (now.getSeconds() >= 50) {
+                // document.querySelector("#watch").style.color = 'red'
+                // document.querySelector("#watch").className = "red" // claas="red" 추가
+                document.querySelector("#watch").setAttribute("class", "red")
+            } else
+                // document.querySelector("#watch").style.color = 'green'
+                // document.querySelector("#watch").className = ""; // class="" 추가
+                document.querySelector("#watch").removeAttribute("class")
+        }, 1000);
+    </script>
+</body>
+
+</html>

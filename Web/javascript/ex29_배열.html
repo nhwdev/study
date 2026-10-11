@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열</title>
+    <style>
+        .area {
+            border: 1px solid black;
+            width: 500px;
+            height: 200px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>배열</h1>
+    <p>
+        배열이란. 동일한 자료형을 여러개 저장할 수 있는 자료형을 의미함<br>
+        JavaScript에서는 자료형에 상관없이 배열에 저장 할 수 있음<br>
+        javaScript에서는 크기에 제한이 없다. 가변적임<br>
+        자바의 ArrayList와 더 가깝다.<br>
+        [] 표기법을 사용함<br>
+    </p>
+    <button onclick="arrayTest1()">확인하기</button>
+    <script>
+        function arrayTest1() {
+            const arr = ["홍길동", 20, "서울", true, [1, 2, 3]]
+            console.log(arr)
+            console.log(arr[2])
+            console.log(arr[4])
+            console.log(arr[4][1]) // arr[4] : [1,2,3] arr[4][1] : 2
+        }
+    </script>
+    <hr>
+    <h3>배열에 값을 저장하기</h3>
+    <button onclick="arrayTest2()">확인하기</button>
+    <script>
+        function arrayTest2() {
+            // 배열 생성하기
+            const arr1 = new Array()  // 요소가 없는 배열 생성
+            const arr2 = new Array(3) // 요소가 3개 있는 배열 생성
+            const arr3 = []           // 요소가 없는 배열 생성
+            console.log(`arr1.length: ${arr1.length}`)
+            console.log(`arr2.length: ${arr2.length}`)
+            console.log(`arr3.length: ${arr3.length}`)
+            // arr3에 값 저장하기
+            arr3[0] = '바나나' // 0번 인덱스의 요소 저장
+            arr3[1] = '사과'
+            arr3[2] = '키위'
+            arr3[9] = '딸기'
+            console.log(arr3)
+            console.log(arr3.length) // 10
+            /* 
+            * arr3의 모든 요소 출력하기 : for 구문 이용
+            * 1. 모든 배열의 요소를 출력. 값이 없는 요소는 undefined 임
+            * 2. 배열 요소의 일부만 인덱스를 이용하여 출력가능
+            */
+            for (let i = 0; i < arr3.length; i++) {
+                console.log(`arr3[${i}]=${arr3[i]}`)
+            }
+            /* 
+            * arr3의 모든 요소 출력하기 : for in 구문 이용
+            * 1. 모든 배열의 요소를 출력. 값이 없는 요소(undefined)는 출력❌
+            * 2. 값이 없는 요소를 제외한 모든 요소가 출력
+            */
+            console.log("===== for in 구문 이용 ======")
+            for (let i in arr3) {
+                console.log(`arr3[${i}]=${arr3[i]}`)
+                console.log(i)
+            }
+            /* 
+            * arr3의 모든 요소 출력하기 : for of 구문 이용
+            * 1. 모든 배열의 요소를 출력. 값이 없는 요소(undefined)도 출력⭕
+            * 2. 모든 요소가 출력.
+            * 3. 인덱스 사용 불가
+            */
+            console.log("===== for of 구문 이용 =====")
+            for (let a of arr3) { // a : 요소 인덱스 사용 불가.
+                console.log(a)
+            }
+        }
+    </script>
+    <hr>
+    <h3>배열의 함수</h3>
+    <h4>배열.indexOf(요소) : 배열 내의 요소의 위치(인덱스) 값 리턴. 없는 경우 -1 리턴</h4>
+    <div class="area" id="area1"></div>
+    <button onclick="indexOfTest()">확인하기</button>
+    <script>
+        function indexOfTest() {
+            const area1 = document.querySelector("#area1")
+            const arr = ["사과", "딸기", "복숭아", "바나나", "키위", "귤", "오렌지"]
+            const search = prompt("위치를 찾고 싶은 과일명 입력")
+            let index = arr.indexOf(search)
+            area1.innerHTML += `찾는 과일 : ${search} → `
+            if (index == -1)
+                area1.innerHTML += "판매하지 않습니다.<br>"
+            else
+                area1.innerHTML += `${index}번 위치에 있습니다.<br>`
+        }
+    </script>
+    <hr>
+    <h4>배열.concat(배열,배열) : 배열에 배열 추가하기</h4>
+    <div class="area" id="area2"></div>
+    <button onclick="concatTest()">확인하기</button>
+    <script>
+        function concatTest() {
+            const area = document.querySelector("#area2")
+            const arr1 = ["사과", "딸기"]
+            const arr2 = ["자동차", "비행기", "오토바이"]
+            area.innerHTML += `arr1 : ${arr1}<br>`
+            area.innerHTML += `arr2 : ${arr2}<br>`
+            //a arr1.concat(arr2) : arr1 배열에 arr2 추가한 새로운 배열 생성됨
+            area.innerHTML += `arr1.concat(arr2) : ${arr1.concat(arr2)}<br>` // 새로운 배열이 생성
+            area.innerHTML += `arr1 : ${arr1}<br>` // arr1 배열은 변경되지 않음
+            area.innerHTML += `arr1.concat((arr2), [1, 2, 3]) : ${arr1.concat((arr2), [1, 2, 3])}<br>`
+            let arr3 = arr1.concat(arr2, [1, 2, 3]) // concat 배열 저장
+            area.innerHTML += `arr3 : ${arr3}<br>`
+        }
+    </script>
+    <hr>
+    <h4>배열.reverse() : 배열의 요소를 역순으로 변경. 배열 자체가 변경</h4>
+    <div class="area" id="area3"></div>
+    <button onclick="reverseTest()">확인하기</button>
+    <script>
+        function reverseTest() {
+            const area = document.querySelector("#area3")
+            const arr = [1, 2, 3, 4, 5]
+            area.innerHTML = `arr : ${arr}<br>` // [1, 2, 3, 4, 5]
+            area.innerHTML += `reverse : ${arr.reverse()}<br>` // [5, 4, 3, 2, 1] 배열 자체를 변경
+            area.innerHTML += `arr : ${arr}<br>` // [5, 4, 3, 2, 1]
+        }
+    </script>
+    <hr>
+    <h4>배열.sort() : 배열의 요소를 순서대로 정렬. 배열 자체가 변경</h4>
+    <div class="area" id="area4"></div>
+    <button onclick="sortTest()">확인하기</button>
+
+    <script>
+        function sortTest() {
+            const area = document.querySelector("#area4")
+            const arr = ["홍길동", "김삿갓", "이몽룡", "홍길동", "김삿갓"]
+            area.innerHTML = `arr : ${arr}<br>`
+            area.innerHTML += `arr.sort() : ${arr.sort()}<br>`
+            area.innerHTML += `arr : ${arr}<br>`
+            // 내림차순 정렬 : reverse() 함수 사용
+            area.innerHTML += `내림차순 정렬 : ${arr.sort().reverse()}<br>`
+            area.innerHTML += `arr : ${arr}<br>`
+            const arr2 = [30, 21, 101, 18, 1, 201, 70, 7]
+            area.innerHTML += `arr2.sort() : ${arr2.sort()}<br>`
+            /* 
+            * 배열 내의 모든 요소들을 문자열로 변경하여 아스키 코드 값을 기준으로 정렬함. → 문자열 기준으로 정렬
+            */
+            // 숫자 크기대로 정렬 하기 sort(function(l, r) → 결과 음수:l → 앞, 양수 r → 뒤)
+            area.innerHTML += `arr2.sort() 숫자크기로 정렬 : ${arr2.sort(function (l, r) { return l - r })}<br>`
+            area.innerHTML += `arr2 : ${arr2}<br>` // arr2 배열 자체가 변경
+            area.innerHTML += `arr2.sort() 숫자크기로 정렬 : ${arr2.sort(function (l, r) { return r - l })}<br>`
+        }
+    </script>
+    <hr>
+    <h4>배열.push(), pop() : 배열의 요소를 추가, 조회</h4>
+    <p>
+        push(요소값) : 배열에 끝에 인덱스,요소값을 추가. 배열의 크기를 리턴<br>
+        pop() : 배열의 마지막 요소를 리턴. 배열에서 제거
+    </p>
+    <div class="area" id="area5"></div>
+    <button onclick="pushTest()">확인하기</button>
+    <script>
+        function pushTest() {
+            const area = document.querySelector("#area5")
+            const arr = ["서초동", "우장산동", "역삼동", "가산동", "방배동"]
+            area.innerHTML = `arr : ${arr}<br>`
+            area.innerHTML += `arr배열에 데이터 추가 : ${arr.push("신도림동")}<br>`
+            area.innerHTML += `arr : ${arr}<br>`
+            arr.push("잠실동")
+            arr.push("마곡동")
+            area.innerHTML += `arr : ${arr}<br>`
+            area.innerHTML += `arr : ${arr.pop()}<br>`
+            area.innerHTML += `arr : ${arr}<br>`
+            arr.pop()
+            arr.pop()
+            area.innerHTML += `arr : ${arr}<bn>`
+        }
+    </script>
+    <hr>
+    <h4>배열.unshift(), shift() : 배열의 요소를 맨 앞에 추가, 조회</h4>
+    <p>
+        unshift(요소값) : 배열에 맨 앞에 요소값을 추가. 배열의 크기를 리턴<br>
+        shift() : 배열의 맨 앞 요소를 리턴. 배열에서 제거
+    </p>
+    <div class="area" id="area6"></div>
+    <button onclick="shiftTest()">확인하기</button>
+    <script>
+        function shiftTest() {
+            const area = document.querySelector("#area6")
+            const arr = ["당구", "야구", "볼링", "테니스"]
+            arr.unshift("농구")
+            area.innerHTML = `unshift 후 : ${arr} <nr>`
+            area.innerHTML += `unshift("탁구") : ${arr.unshift("탁구")}<br>`
+            area.innerHTML += `arr : ${arr} <br>`
+            let del = arr.shift() // arr 배열의 첫번째 요소 제거하고 리턴
+            area.innerHTML += `제거된 요소: ${del}<br>`
+            area.innerHTML += `arr : ${arr} <br>`
+        }
+    </script>
+    <hr>
+    <h4>배열.slice() : 배열의 부분 배열</h4>
+    <h4>배열.splice() : 배열의 요소를 제거 및 추가</h4>
+    <p>
+        - 배열.slice(시작인덱스, 종료인덱스+1) : 시작인덱스 부터 종료인덱스 까지 리턴<br>
+        - 배열.splice(시작인덱스, 제거갯수, [추가할값]) : 시작인덱스 부터 갯수까지 제거 후 추가<br>
+    </p>
+    <div class="area" id="area7"></div>
+    <button onclick="sliceTest()">확인하기</button>
+    <script>
+        function sliceTest() {
+            // slice()
+            const area = document.querySelector("#area7")
+            const arr = ["Java", "MySql", "HTML", "CSS", "JavaScript"]
+            area.innerHTML += `arr : ${arr}<br>`
+            area.innerHTML += `arr.slice(2, 4) : ${arr.slice(2, 4)}<br>` // 2번 인덱스부터 3번 인덱스까지
+            area.innerHTML += `arr : ${arr}<br>`
+            // splice
+            area.innerHTML += `arr.splice(1, 1, "MariaDB") : ${arr.splice(1, 1, "MariaDB")}<br>` // 1번 인덱스 요소 제거. MariaDB 추가
+            area.innerHTML += `arr : ${arr}<br>` // arr 배열 자체가 변경됨
+            area.innerHTML += `arr.splice(1, 1) : ${arr.splice(1, 1)}<br>` // 1번 인덱스 요소 제거 리턴
+            area.innerHTML += `arr : ${arr}<br>` // arr 배열 자체가 변경됨
+        }
+    </script>
+</body>
+
+</html>

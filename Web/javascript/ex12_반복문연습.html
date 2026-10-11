@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습</title>
+</head>
+
+<body>
+    <p>
+        합계구하기 버튼을 클릭하면 prompt창을 띄워서 숫자만 입력받아
+        입력받은 수까지의 합계를 출력하기<br>
+        for(i = 1; i<=num; i++) 반복문 이용하기<br>
+            계산된 합계는 #total에 출력하기 .div태그의 속성 중 value는 없음
+            innerHTML 속성에 저장하기
+    </p>
+    <button onclick="totalSum()">합계 구하기</button>
+    <div id="total"></div>
+    <script>
+        function totalSum() {
+            let num = prompt("숫자입력")
+            let sum = 0
+            for (i = 1; i <= num; i++) {
+                sum += i
+            }
+            // document.querySelector("#total").innerHTML = "<h1>1부터 " + num + "까지의 합: " + sum + "</h1>"
+            // ` : 백틱. 
+            // JSP 에서는 사용하지 않기. → EL 방식과 충돌됨
+            // `${변수명}` : 변수명의 값을 그대로 문자열로 표현함
+            document.querySelector("#total").innerHTML = `<h1>1부터 ${num}까지의 합: ${sum}</h1>`
+        }
+    </script>
+</body>
+
+</html>
